@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Products, Category
+from random import shuffle
 # Create your views here.
 
 
@@ -14,7 +15,7 @@ def home(request):
 
 def item_detail(request, item_id):
 	products = Products.objects.get(pk=item_id)
-	some_products = Products.objects.all()[:4]
+	some_products = Products.objects.all().order_by('-date')[:4]
 	context = {
 		'products': products,
 		'some_products': some_products,
